@@ -1,0 +1,100 @@
+<%- include('partials/_header'); -%>
+
+    
+<div class="container">
+     <h1>LISTA DE USUARIOS</h1>
+      
+    <table class="table table-bordered table-hover">
+        <a href="/Desc" role="button" class="btn btn-outline-info btn-sm mr-3">Descendiente</a>
+        <a href="/Asc" role="button" class="btn btn-outline-info btn-sm mr-3">Ascendente</a>
+        <thead>
+            <tr>
+                <th>Nro</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Nombre Usuario</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (data) { %>
+                <% for (var i=0; i < data.length; i++) { %>
+                    <tr>
+                        <td><%= i+1  %> </td>
+                        <td><%= data[i].first_name %> </td>
+                        <td><%= data[i].last_name %> </td>
+                        <td><%= data[i].email %> </td>
+                        <td><%= data[i].username %> </td>
+                        <td>
+                            <a href="/delete/<%= data[i].user_id %> " class="btn btn-danger">Delete</a>
+                            <a href="/update/<%= data[i].user_id %> " class="btn btn-success">Editar</a>
+                            <a href="poems/<%= data[i].user_id %> " class="btn btn-primary">Ver Poemas</a>
+                        </td>
+                    </tr>
+                
+                <% } %>
+            <% } %>
+        </tbody>
+    </table>  
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Nuevo Usuario
+    </button>      
+</div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Registrar Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/add" method="post">
+                        <div class="form-group">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="inputFirstName" class="form-label">Nombres: </label>
+                                    <input type="text" name="first_name" class="form-control" placeholder="Nombres">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputLastName" class="form-label">Apellidos: </label>
+                                    <input type="text" name="last_name" class="form-control" placeholder="Apellidos">
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputEmail" class="form-label">Correo Eléctronico: </label>
+                                    <input type="email" name="email" class="form-control" placeholder="Email">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputUserName" class="form-label">Nombre de Usuario: </label>
+                                    <input type="text" name="username" class="form-control" placeholder="UserName">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="inputPassword" class="form-label">Contraseña: </label>
+                                    <input type="password" name="pass_phase" class="form-control"
+                                        placeholder="Password">
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputFotoPerfil" class="form-label">Foto de Perfil: </label>
+                                    <input type="text" name="profile_pic" class="form-control"
+                                        placeholder="Foto de Perfil">
+                                </div>
+                                <div class="col-12">
+                                    <input type="checkbox" name="is_admin" class="form-check-inpit">
+                                    <label class="form-check-label">Es Administrador</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <%- include('partials/_footer'); -%>

@@ -1,0 +1,63 @@
+<%- include('partials/_header'); -%>
+<!-- Modal Edit -->
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Usuario</h5>
+        </div>
+        <div class="modal-body">
+            <form action="/update/<%= data.user_id %>" method="post">
+                <div class="form-group">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label for="inputFirstName" class="form-label">Nombres: </label>
+                            <input type="text" name="first_name" class="form-control" placeholder="Nombres"
+                                value="<%= data.first_name %>">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputLastName" class="form-label">Apellidos: </label>
+                            <input type="text" name="last_name" class="form-control" placeholder="Apellidos"
+                                value="<%= data.last_name %>">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputEmail" class="form-label">Correo Eléctronico: </label>
+                            <input type="email" name="email" class="form-control" placeholder="Email"
+                                value="<%= data.email %>">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputUserName" class="form-label">Nombre de Usuario: </label>
+                            <input type="text" name="username" class="form-control" placeholder="UserName"
+                                value="<%= data.username %>">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPassword" class="form-label">Contraseña: </label>
+                            <input type="password" name="pass_phase" class="form-control" placeholder="Password"
+                                value="<%= data.pass_phase %>">
+                        </div>
+                        <div class="col-12">
+                            <label for="inputFotoPerfil" class="form-label">Foto de Perfil: </label>
+                            <input type="text" name="profile_pic" class="form-control" placeholder="Foto de Perfil"
+                                value="<%= data.profile_pic %>">
+                        </div>
+                        <div class="col-12">
+                            <% if (data.is_admin==0) {%>
+                                <input type="checkbox" name="is_admin" class="form-check-inpit">
+                                <% } else {%>
+                                    <input type="checkbox" name="is_admin" class="form-check-inpit" checked>
+                                    <% } %>
+
+                                        <label class="form-check-label">Es Administrador</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    
+                    <a href="/" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/_footer'); -%>

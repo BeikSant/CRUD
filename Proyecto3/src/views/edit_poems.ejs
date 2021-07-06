@@ -1,0 +1,49 @@
+<%- include('partials/_header'); -%>
+<!-- Modal Edit -->
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar Poema</h5>
+        </div>
+        <div class="modal-body">
+            <form action="/poems/update/<%= data.poem_id %>/<%= data.user_id %>" method="post">
+                <div class="form-group">
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <label for="inputTitle" class="form-label">Titulo: </label>
+                            <input type="text" name="title" value="<%= data.title %>" class="form-control" placeholder="Titulo">
+                        </div>
+                        <div class="col-md-12">
+                            <label for="inputPoem">Escriba el poema:</label>
+                            <textarea class="form-control"  name="poem" rows="3"><%= data.poem %></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label for="inputPoem">Seleccione la Categoria:</label>
+                            <select class="form-control" name="category">
+                                <% if (categories) { %>
+                                    <% for (var i=0; i < categories.length; i++) { %>
+                                        <% if (categories[i].category_id == data.category_id) {%> 
+                                            <option selected>
+                                        <% } else { %> 
+                                            <option>
+                                        <% } %> 
+                                            <%= categories[i].category  %> 
+                                        </option>
+                                    <% } %>
+                                <% } %>
+                                
+                              </select>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="/poems/<%= data.user_id %> " class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</a>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/_footer'); -%>

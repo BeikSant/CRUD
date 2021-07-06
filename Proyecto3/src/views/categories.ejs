@@ -1,0 +1,65 @@
+<%- include('partials/_header'); -%>
+
+    
+<div class="container">
+    <h1>LISTA DE CATEGORIAS</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nro</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (data) { %>
+                <% for (var i=0; i < data.length; i++) { %>
+                    <tr>
+                        <td><%= i+1 %> </td>
+                        <td><%= data[i].category %> </td>
+                        <td>
+                            <a href="categories/delete/<%= data[i].category_id %> " class="btn btn-danger">Delete</a>
+                            <a href="categories/update/<%= data[i].category_id %> " class="btn btn-success">Editar</a>
+                        </td>
+                    </tr>
+                
+                <% } %>
+            <% } %>
+        </tbody>
+    </table>  
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categorieModal">
+        Nueva Categoria
+    </button>      
+</div>
+
+    <div class="modal fade" id="categorieModal" tabindex="-1" aria-labelledby="categorieModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Registrar Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="categories/add" method="post">
+                        <div class="form-group">
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label for="inputCategory" class="form-label">Ingrese la categoría: </label>
+                                    <input type="text" name="category" class="form-control"
+                                        placeholder="Categoria">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <%- include('partials/_footer'); -%>

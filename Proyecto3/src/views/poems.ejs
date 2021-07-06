@@ -1,0 +1,95 @@
+<%- include('partials/_header'); -%>
+
+    
+<div class="container">
+     <h1>Lista de Poemas de <%= user.first_name %> <%= user.last_name %></h1>
+      
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Nro</th>
+                <th>Titulo</th>
+                <th>Poema</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (data) { %>
+                <% for (var i=0; i < data.length; i++) { %>
+                    <tr>
+                        <td><%= i+1 %> </td>
+                        <td><%= data[i].title %> </td>
+                        <td><%= data[i].poem %> </td>
+                        <td>
+                        <% if (categories) { %>
+                            <% for (var j=0; j < categories.length; j++) { %>
+                                <% if (categories[j].category_id == data[i].category_id) {%> 
+                                    <%= categories[j].category %>
+                                    <% j = categories.length; %> 
+                                <% } %> 
+                            <% } %>
+                        <% } %></td>
+                        <td>
+                            <a href="/poems/delete/<%= data[i].poem_id %>/<%= data[i].user_id %>" class="btn btn-danger">Delete</a>
+                            <a href="/poems/update/<%= data[i].poem_id %>/<%= data[i].user_id %>" class="btn btn-success">Editar</a>
+                        </td>
+                    </tr>
+                
+                <% } %>
+            <% } %>
+        </tbody>
+    </table>  
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Nuevo Poema
+    </button>      
+</div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nuevo Poema</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/poems/add/<%= user.user_id %>" method="post">
+                        <div class="form-group">
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label for="inputTitle" class="form-label">Titulo: </label>
+                                    <input type="text" name="title" class="form-control" placeholder="Titulo">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="inputPoem">Escriba el poema:</label>
+                                    <textarea class="form-control" name="poem" rows="3"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label for="inputPoem">Seleccione la Categoria:</label>
+                                    <select class="form-control" name="category">
+                                        <% if (categories) { %>
+                                            <% for (var i=0; i < categories.length; i++) { %>
+                                                <option>
+                                                    <%= categories[i].category  %> 
+                                                </option>
+                                            <% } %>
+                                        <% } %>
+                                        
+                                      </select>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <%- include('partials/_footer'); -%>
